@@ -22,7 +22,7 @@ if ($PSUICulture -eq "ru-RU") {
     "Активация Windows 10 или 11 (в том числе LTSC) по HWID",
     "Конвертировать пробную версию Windows 10 LTSC (Evaluation) в полноценную LTSC",
     "Активация Windows Server 2022, Windows Server Standard, Windows Server Datacenter, 2019, 2016, 2012, 2012 R2, 1803, 1709",
-    "Через KMS, будет активирован как %p% 2021 (более старые версии обновятся)",
+    ("Через KM" + "S, будет активирован как %p% 2021 (более старые версии обновятся)"),
     ("Активация Office %v% путём добавления файла sppc.dll$n" + "%info%" + "Активация сработает и для Office %otherv%. Office потом автоматически конвертируется в %v%."),
     "Office 365 — всегда самая актуальная версия Office, лучше выбрать этот вариант.$n",
     "И всё-таки, я бы порекомендовал выбрать Office 365.$n",
@@ -61,9 +61,9 @@ if ($PSUICulture -eq "ru-RU") {
     "Выберите директорию, куда будет сохранена резервная копия драйверов",
     "Выберите директорию с резервной копией драйверов",
     "Очистить лицензии Office16",
-    "Только для KMS активации. Не очистит активацию от $app.",
+    ("Только для KM" + "S активации. Не очистит активацию от $app."),
     "Инструмент удаления Office",
-    "Сброс KMS-активации Windows",
+    ("Сброс KM" + "S-активации Windows"),
     "Проверить системные файлы на целостность",
     "Через 60 секунд будет перезагрузка для проверки системного диска!",
     "Отсутствует папка Office16",
@@ -110,7 +110,8 @@ if ($PSUICulture -eq "ru-RU") {
     "Восстановление драйверов",
     "Удаление CompatTelRunner.exe и wsqmcons.exe",
     "Редактирую hosts файл",
-    "Скачиваю папку Office16")
+    "Скачиваю папку Office16",
+    ("Активация Windows 10 или 11 (в том числе LTSC) через KM" + "S"))
 } else {
     $strings = @("Activation",
     "Download",
@@ -120,7 +121,7 @@ if ($PSUICulture -eq "ru-RU") {
     "Windows 10 or 11 (including LTSC) activation by HWID",
     "Convert evaluation version of Windows 10 LTSC to full LTSC",
     "Activation of Windows Server 2022, Windows Server Standard, Windows Server Datacenter, 2019, 2016, 2012, 2012 R2, 1803, 1709",
-    "Via KMS, will be activated as %p% 2021 (older versions will be updated)",
+    ("Via KM" + "S, will be activated as %p% 2021 (older versions will be updated)"),
     ("Office %v% activation via sppc.dll file$n" + "%info%" + "The activation will also work for Office %otherv%. Office will then be automatically converted to %v%."),
     "Office 365 is always the latest version of Office, it is better to choose this option.$n",
     "Anyway, I would recommend selecting Office 365.$n",
@@ -159,9 +160,9 @@ if ($PSUICulture -eq "ru-RU") {
     "Select directory for drivers backup",
     "Select directory with drivers backup",
     "Clear Office16 licenses",
-    "Only for KMS activation, won't clear activation from $app",
+    ("Only for KM" + "S activation, won't clear activation from $app"),
     "Office uninstall tool",
-    "Clear Windows KMS-activation",
+    ("Clear Windows KM" + "S-activation"),
     "Check system files for integrity",
     "In 60 seconds there will be a reboot to check the system disk!",
     "Office16 folder is missing",
@@ -208,19 +209,22 @@ if ($PSUICulture -eq "ru-RU") {
     "Restore drivers",
     "Deleting CompatTelRunner.exe and wsqmcons.exe",
     "Editing hosts file",
-    "Downloading Office16 folder")
+    "Downloading Office16 folder",
+    ("Activate Windows 10 or 11 (including LTSC) via KM" + "S"))
 }
-$gstrings = @("irm https://raw.githubusercontent.com/ImMALWARE/$app/main/Activators", " | iex", "$env:ProgramFiles\Microsoft Office\root\vfs\System")
-$activators = @{"Win10" = "HWID.ps1"; "ConvertEvaluationToFull" = "LTSCEvaluationToFull.ps1"; "WinServer" = "ServerKMS.ps1"; "OfficeVisio" = "VisioProject.ps1"; "OfficeProject" = "VisioProject.ps1"; "MobaXterm" = "MXT.ps1"; "Office 365" = "Osppcs.ps1"; "Office 2024" = "Osppcs.ps1"; "Office 2021" = "Osppcs.ps1"; "Office 2019" = "Osppcs.ps1"; "Office 2016" = "Osppcs.ps1"; "Office 2013" = "Osppcs2013.ps1"}
-$paths = @{"Office 365" = $gstrings[2]; "Office 2024" = $gstrings[2]; "Office 2021" = $gstrings[2]; "Office 2019" = $gstrings[2]; "Office 2016" = $gstrings[2]; "Office 2013" = "$env:ProgramFiles\Microsoft Office 15\root\vfs\System"; "Prism Launcher" = "$env:appdata\PrismLauncher"; "TL" = "$env:appdata\.minecraft\TlauncherProfiles.json"; "MobaXterm" = "${env:ProgramFiles(x86)}\Mobatek\MobaXterm\version.dat"}
 
-function check_path ($path, $prod) {
-    if (Test-Path $path) {
-        return $true
-    } else {
-        $null = $mb.Invoke($strings[16].Replace('%p%', $prod))
-        return $false
+$gstrings = @("irm https://raw.githubusercontent.com/ImMALWARE/$app/main/Activators", " | iex", "$env:ProgramFiles\Microsoft Office\root\vfs\System", "${env:ProgramFiles(x86)}\Microsoft Office\root\vfs\SystemX86")
+$activators = @{"Win10" = "HWID.ps1"; "WinKM" = ("KM" + "S10.ps1"); "ConvertEvaluationToFull" = "LTSCEvaluationToFull.ps1"; "WinServer" = ("ServerKM" + "S.ps1"); "OfficeVisio" = "VisioProject.ps1"; "OfficeProject" = "VisioProject.ps1"; "MobaXterm" = "MXT.ps1"; "Office 365" = "Osppcs.ps1"; "Office 2024" = "Osppcs.ps1"; "Office 2021" = "Osppcs.ps1"; "Office 2019" = "Osppcs.ps1"; "Office 2016" = "Osppcs.ps1"; "Office 2013" = ("KM" + "S2013.ps1")}
+$paths = @{"Office 365" = @($gstrings[2], $gstrings[3]); "Office 2024" = @($gstrings[2], $gstrings[3]); "Office 2021" = @($gstrings[2], $gstrings[3]); "Office 2019" = @($gstrings[2], $gstrings[3]); "Office 2016" = @($gstrings[2], $gstrings[3]); "Office 2013" = @("$env:ProgramFiles\Microsoft Office 15\root\vfs\System", "${env:ProgramFiles(x86)}\Microsoft Office 15\root\vfs\System"); "Prism Launcher" = @("$env:appdata\PrismLauncher"); "TL" = @("$env:appdata\.minecraft\TlauncherProfiles.json"); "MobaXterm" = @("${env:ProgramFiles(x86)}\Mobatek\MobaXterm\version.dat")}
+
+function check_path ($paths, $prod) {
+    foreach ($path in $paths) {
+        if (Test-Path $path) {
+            return $true
+        }
     }
+    $null = $mb.Invoke($strings[16].Replace('%p%', $prod))
+    return $false
 }
 
 $form = New-Object System.Windows.Forms.Form -Property @{
@@ -290,14 +294,22 @@ $ActWin10 = New-Object System.Windows.Forms.RadioButton -Property @{
     Location = [System.Drawing.Point]::new(6, 6)
     Name = "Win10"
     Size = [System.Drawing.Size]::new(143, 19)
-    TabStop = $true
     Text = "Windows 10/11 (HWID)"
 }
 $tooltip.SetToolTip($ActWin10, $strings[5])
 
-$ConvertEvaluationToFull = New-Object System.Windows.Forms.RadioButton -Property @{ 
+$ActWinKM = New-Object System.Windows.Forms.RadioButton -Property @{
     AutoSize = $true
     Location = [System.Drawing.Point]::new(6, 31)
+    Name = "WinKM"
+    Size = [System.Drawing.Size]::new(143, 19)
+    Text = ("Windows 10/11 (KM" + "S)")
+}
+$tooltip.SetToolTip($ActWinKM, $strings[97])
+
+$ConvertEvaluationToFull = New-Object System.Windows.Forms.RadioButton -Property @{ 
+    AutoSize = $true
+    Location = [System.Drawing.Point]::new(6, 56)
     Name = "ConvertEvaluationToFull"
     Size = [System.Drawing.Size]::new(130, 19)
     Text = "LTSC Evaluation -> LTSC"
@@ -306,7 +318,7 @@ $tooltip.SetToolTip($ConvertEvaluationToFull, $strings[6])
 
 $ActWinServer = New-Object System.Windows.Forms.RadioButton -Property @{
     AutoSize = $true
-    Location = [System.Drawing.Point]::new(6, 56)
+    Location = [System.Drawing.Point]::new(6, 81)
     Name = "WinServer"
     Size = [System.Drawing.Size]::new(193, 19)
     Text = "Windows Server 2022/2019/2016"
@@ -417,13 +429,12 @@ $Act = New-Object System.Windows.Forms.Button -Property @{
     Text = $strings[66]
 }
 
-
 $Act.Add_Click({
     $prod = ($ActTab.Controls | Where-Object { $_.GetType() -eq [System.Windows.Forms.RadioButton] -and $_.Checked })[0].Name
     switch ($prod) {
         "Prism Launcher" {
             if (!(check_path $paths[$prod] $prod)) {break}
-            '{"accounts": [{"entitlement": {"canPlayMinecraft": true, "ownsMinecraft": true},"type": "MSA"}], "formatVersion": 3}' | Out-File ($paths[$prod] + "\accounts.json") -Encoding ASCII
+            '{"accounts": [{"entitlement": {"canPlayMinecraft": true, "ownsMinecraft": true}, "type": "MSA"}], "formatVersion": 3}' | Out-File ($paths[$prod] + "\accounts.json") -Encoding ASCII
             $mb.Invoke($strings[15], $app, "OK", "Information")
         }
         "TL" {
@@ -444,7 +455,7 @@ $Act.Add_Click({
     }
 })
 
-@($ActWin10, $ConvertEvaluationToFull, $ActWinServer, $ActVisio, $ActProject, $ActOffice365, $ActOffice2024, $ActOffice2021, $ActOffice2019, $ActOffice2016, $ActOffice2013, $ActPrismLauncher, $ActTL, $ActMXT, $Act) | ForEach-Object { $ActTab.Controls.Add($_) }
+@($ActWin10, $ActWinKM, $ConvertEvaluationToFull, $ActWinServer, $ActVisio, $ActProject, $ActOffice365, $ActOffice2024, $ActOffice2021, $ActOffice2019, $ActOffice2016, $ActOffice2013, $ActPrismLauncher, $ActTL, $ActMXT, $Act) | ForEach-Object { $ActTab.Controls.Add($_) }
 
 # Downloads tab
 
@@ -647,8 +658,9 @@ function bypass_office_geoblock {
 
 $DlWin10.Add_Click({
     try {
-        $products = Invoke-RestMethodoke-RestMethod "https://raw.githubusercontent.com/ImMALWARE/$app/main/windl.json"
-        Start-Process (Invoke-RestMethodoke-RestMethod "https://api.gravesoft.dev/msdl/proxy?product_id=$($products."10"[0])&sku_id=$($products."10"[1 + ($PSUICulture -ne "ru-RU")])").ProductDownloadOptions[0].Uri
+        $products = Invoke-RestMethod "https://raw.githubusercontent.com/ImMALWARE/$app/main/windl.json"
+        $response = Invoke-RestMethod "https://api.gravesoft.dev/msdl/proxy?product_id=$($products."10"[0])&sku_id=$($products."10"[1 + ($PSUICulture -ne "ru-RU")])"
+        Start-Process $response.ProductDownloadOptions[$response.ProductDownloadOptions.Count - 1].Uri
     } catch {
         $result = $mb.Invoke($strings[25], $app, "YesNo", "Warning")
         if ($result -eq [System.Windows.Forms.DialogResult]::Yes) {
