@@ -21,7 +21,7 @@ if ($PSUICulture -eq "ru-RU") {
     "Информация",
     "Активация Windows 10 или 11 (в том числе LTSC) по HWID",
     "Конвертировать пробную версию Windows 10 LTSC (Evaluation) в полноценную LTSC",
-    "Активация Windows Server 2022, Windows Server Standard, Windows Server Datacenter, 2019, 2016, 2012, 2012 R2, 1803, 1709",
+    "Активация Windows Server 2025, Windows Server Standard, Windows Server Datacenter, 2022, 2019, 2016, 2012, 2012 R2, 1803, 1709",
     ("Через KM" + "S, будет активирован как %p% 2021 (более старые версии обновятся)"),
     ("Активация Office %v% путём добавления файла sppc.dll$n" + "%info%" + "Активация сработает и для Office %otherv%. Office потом автоматически конвертируется в %v%."),
     "Office 365 — всегда самая актуальная версия Office, лучше выбрать этот вариант.$n",
@@ -120,7 +120,7 @@ if ($PSUICulture -eq "ru-RU") {
     "Info",
     "Windows 10 or 11 (including LTSC) activation by HWID",
     "Convert evaluation version of Windows 10 LTSC to full LTSC",
-    "Activation of Windows Server 2022, Windows Server Standard, Windows Server Datacenter, 2019, 2016, 2012, 2012 R2, 1803, 1709",
+    "Activation of Windows Server 2025, Windows Server Standard, Windows Server Datacenter, 2022, 2019, 2016, 2012, 2012 R2, 1803, 1709",
     ("Via KM" + "S, will be activated as %p% 2021 (older versions will be updated)"),
     ("Office %v% activation via sppc.dll file$n" + "%info%" + "The activation will also work for Office %otherv%. Office will then be automatically converted to %v%."),
     "Office 365 is always the latest version of Office, it is better to choose this option.$n",
@@ -321,7 +321,7 @@ $ActWinServer = New-Object System.Windows.Forms.RadioButton -Property @{
     Location = [System.Drawing.Point]::new(6, 81)
     Name = "WinServer"
     Size = [System.Drawing.Size]::new(193, 19)
-    Text = "Windows Server 2022/2019/2016"
+    Text = "Windows Server 2025/2022/2019/2016"
 }
 $tooltip.SetToolTip($ActWinServer, $strings[7])
 
