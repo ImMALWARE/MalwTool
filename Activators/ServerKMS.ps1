@@ -38,6 +38,9 @@ Set-Location $env:SystemRoot\System32
 ./cscript.exe //nologo slmgr.vbs /ipk WX4NM-KYWYW-QJJR4-XV3QB-6VM33 > $null # Windows Server 2022 Datacenter
 ./cscript.exe //nologo slmgr.vbs /ipk VDYBN-27WPP-V4HQT-9VMD4-VMK7H > $null # Windows Server 2022 Standard
 
+./cscript.exe //nologo slmgr.vbs /ipk D764K-2NDRG-47T6Q-P8T8W-YP6DF > $null # Windows Server 2025 Datacenter
+./cscript.exe //nologo slmgr.vbs /ipk TVRH6-WHNXV-R9WG3-9XRFY-MY832 > $null # Windows Server 2025 Standard
+
 ./cscript.exe //nologo slmgr.vbs /skms kms8.msguides.com > $null
 ./cscript.exe //nologo slmgr.vbs /ato
 pause
