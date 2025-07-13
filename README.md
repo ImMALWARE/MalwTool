@@ -5,7 +5,7 @@
 ## Запуск
 Для запуска необходимо выполнить команду. Проще всего открыть поиск Windows и выполнить её там. Но ещё можно выполнить в Win + R, в cmd, в PowerShell, в мастере создания ярлыка
 ```pwsh
-powershell -command "irm https://raw.githubusercontent.com/ImMALWARE/MalwTool/main/MalwTool.ps1 | iex"
+powershell -command "irm https://github.com/ImMALWARE/MalwTool/raw/refs/heads/main/MalwTool.ps1 | iex"
 ```
 Второй, сокращенный вариант команды (просто редирект на тот же GitHub с моего сайта)
 ```pwsh
