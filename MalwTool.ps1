@@ -56,8 +56,8 @@ if ($PSUICulture -eq "ru-RU") {
     "Удалить CompatTelRunner.exe и wsqmcons.exe",
     "Установить Spicetify",
     "Модификация приложения Spotify",
-    "Обойти гео-ограничения веб-сервисов",
-    ("Обойти гео-ограничения через редактирование файла hosts$n" + "Будут работать ChatGPT, Gemini, NotebookLM, Copilot, Spotify, Codeium, GitHub Copilot, Claude, Notion, Canva, TikTok$n" + "Без VPN и других сторонних приложений"),
+    "Обойти блокировки через hosts",
+    ("Установить hosts файл из dns.malw.link.$n" + "Будут работать ChatGPT, Gemini, NotebookLM, Copilot, Spotify, Codeium, GitHub Copilot, Claude, Notion, Canva, TikTok и многое другое$n" + "Подробнее на info.dns.malw.link"),
     "Выберите директорию, куда будет сохранена резервная копия драйверов",
     "Выберите директорию с резервной копией драйверов",
     "Очистить лицензии Office16",
@@ -155,8 +155,8 @@ if ($PSUICulture -eq "ru-RU") {
     "Delete CompatTelRunner.exe and wsqmcons.exe",
     "Install Spicetify",
     "Spotify mod",
-    "Bypass web-apps geo-blocking",
-    ("Bypass geo-restrictions via editing hosts file$n" + "The following services will work: ChatGPT, Gemini, NotebookLM, Copilot, Spotify, Codeium, GitHub Copilot, Claude, Notion, Canva, TikTok$n" + "Without VPN and other apps"),
+    "Bypass geo-blocks via hosts",
+    ("This is for russians only! Install hosts file from dns.malw.link$n" + "A lot of websites will work: ChatGPT, Gemini, NotebookLM, Copilot, Spotify, Codeium, GitHub Copilot, Claude, Notion, Canva, TikTok an many others$n" + "See more at info.dns.malw.link"),
     "Select directory for drivers backup",
     "Select directory with drivers backup",
     "Clear Office16 licenses",
@@ -837,7 +837,7 @@ $tooltip.SetToolTip($spicetify, $strings[41])
 
 $edit_hosts = New-Object System.Windows.Forms.Button -Property @{
     Location = [System.Drawing.Point]::new(149, 122)
-    Size = [System.Drawing.Size]::new(225, 23)
+    Size = [System.Drawing.Size]::new(190, 23)
     Text = $strings[42]
 }
 $tooltip.SetToolTip($edit_hosts, $strings[43])
@@ -863,7 +863,13 @@ $explorerext.Add_Click({
 })
 
 $winget.Add_Click({
-    Start-Process powershell -ArgumentList "irm https://raw.githubusercontent.com/ImMALWARE/winget-installer/main/WingetInstaller.ps1 | Invoke-Expression" -Verb RunAs
+    Start-Process powershell -ArgumentList @"
+    `$progressPreference = 'silentlyContinue'
+    Install-PackageProvider -Name NuGet -Force
+    Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery
+    Repair-WinGetPackageManager
+    Pause
+"@ -Verb RunAs
 })
 
 $store.Add_Click({
@@ -923,8 +929,8 @@ $edit_hosts.Add_Click({
         `$host.UI.RawUI.WindowTitle = '$app — $($strings[95])'
         `$current_hosts = Get-Content -Path 'C:\Windows\System32\drivers\etc\hosts' -Raw
         `$new_hosts = irm https://raw.githubusercontent.com/ImMALWARE/dns.malw.link/master/hosts
-        `$start_marker = '### t.me/immalware: hosts file'
-        `$end_marker = '### t.me/immalware: end hosts file'
+        `$start_marker = '### dns.malw.link: hosts file'
+        `$end_marker = '### dns.malw.link: end hosts file'
 
         `$pattern = '(?s)' + [regex]::Escape(`$start_marker) + '.*?' + [regex]::Escape(`$end_marker)
 
