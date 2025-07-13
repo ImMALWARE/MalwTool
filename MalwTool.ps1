@@ -922,7 +922,7 @@ $edit_hosts.Add_Click({
     Start-Process powershell -ArgumentList @"
         `$host.UI.RawUI.WindowTitle = '$app — $($strings[95])'
         `$current_hosts = Get-Content -Path 'C:\Windows\System32\drivers\etc\hosts' -Raw
-        `$new_hosts = irm https://pastebin.com/raw/5zvfV9Lp
+        `$new_hosts = irm https://raw.githubusercontent.com/ImMALWARE/dns.malw.link/master/hosts
         `$start_marker = '### t.me/immalware: hosts file'
         `$end_marker = '### t.me/immalware: end hosts file'
 
