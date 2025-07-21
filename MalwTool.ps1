@@ -883,7 +883,7 @@ $driversbackup.Add_Click({
         RootFolder = [System.Environment+SpecialFolder]::MyComputer
     }
     if ($dialog.ShowDialog() -eq 'OK') {
-        Start-Process powershell -ArgumentList "`$host.UI.RawUI.WindowTitle = "$app — $($strings[92])"; pnputil /export-driver * '$($dialog.SelectedPath)'; pause" -Verb RunAs
+        Start-Process powershell -ArgumentList "`$host.UI.RawUI.WindowTitle = '$app — $($strings[92])'; pnputil /export-driver * '$($dialog.SelectedPath)'; pause" -Verb RunAs
     }
 })
 
@@ -893,7 +893,7 @@ $driversrestore.Add_Click({
         RootFolder = [System.Environment+SpecialFolder]::MyComputer
     }
     if ($dialog.ShowDialog() -eq 'OK') {
-        Start-Process powershell -ArgumentList "`$host.UI.RawUI.WindowTitle = "$app — $($strings[93])"; pnputil /add-driver '$($dialog.SelectedPath)\*' /subdirs /install; pause" -Verb RunAs
+        Start-Process powershell -ArgumentList "`$host.UI.RawUI.WindowTitle = '$app — $($strings[93])'; pnputil /add-driver '$($dialog.SelectedPath)\*' /subdirs /install; pause" -Verb RunAs
     }
 })
 
