@@ -434,7 +434,7 @@ $Act.Add_Click({
     switch ($prod) {
         "Prism Launcher" {
             if (!(check_path $paths[$prod] $prod)) {break}
-            '{"accounts": [{"entitlement": {"canPlayMinecraft": true, "ownsMinecraft": true}, "type": "MSA"}], "formatVersion": 3}' | Out-File ($paths[$prod] + "\accounts.json") -Encoding ASCII
+            '{"accounts": [{"entitlement": {"canPlayMinecraft": true, "ownsMinecraft": true}, "type": "MSA"}], "formatVersion": 3}' | Out-File (($paths[$prod])[0] + "\accounts.json") -Encoding ASCII
             $mb.Invoke($strings[15], $app, "OK", "Information")
         }
         "TL" {
