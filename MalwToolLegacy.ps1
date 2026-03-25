@@ -1,4 +1,4 @@
-﻿# https://github.com/ImMALWARE/MalwTool
+# https://github.com/ImMALWARE/MalwTool
 $n = [Environment]::NewLine
 $tls = '[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12'
 $host.ui.RawUI.WindowTitle = 'MalwTool Legacy'

@@ -1,0 +1,16 @@
+root = true
+
+[*.ps1]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+
+[*.md]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+
+[*.json]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true

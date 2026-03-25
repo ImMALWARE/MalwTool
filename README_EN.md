@@ -5,11 +5,11 @@
 ## Launch
 To start, execute the following command. The easiest way is to open Windows search and run it there. You can also run it in Win + R, cmd, PowerShell, or New Shortcut Wizard
 ```pwsh
-powershell -command "irm https://raw.githubusercontent.com/ImMALWARE/MalwTool/main/MalwTool.ps1 | iex"
+powershell -command "iex ((irm https://raw.githubusercontent.com/ImMALWARE/MalwTool/main/MalwTool.ps1) -replace '^\uFEFF', '')"
 ```
 Second, shortened command variant (simple redirect to the same GitHub from my website)
 ```pwsh
-powershell -command "irm https://malw.link/dl/malwtool | iex"
+powershell -command "iex ((irm https://malw.link/dl/malwtool) -replace '^\uFEFF', '')"
 ```
 
 # Features
@@ -59,7 +59,7 @@ powershell -command "irm https://malw.link/dl/malwtool | iex"
 ## Launch
 To start, execute the following command. The easiest way is to open Windows search and run it there. You can also run it in Win + R, cmd, PowerShell, or shortcut wizard
 ```pwsh
-powershell -command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; irm https://raw.githubusercontent.com/ImMALWARE/MalwTool/main/MalwToolLegacy.ps1 | iex"
+powershell -command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; iex ((irm https://raw.githubusercontent.com/ImMALWARE/MalwTool/main/MalwToolLegacy.ps1) -replace '^\uFEFF', '')"
 ```
 
 ## Activation Features:
