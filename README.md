@@ -5,11 +5,11 @@
 ## Запуск
 Для запуска необходимо выполнить команду. Проще всего открыть поиск Windows и выполнить её там. Но ещё можно выполнить в Win + R, в cmd, в PowerShell, в мастере создания ярлыка
 ```pwsh
-powershell -command "iex ((irm https://github.com/ImMALWARE/MalwTool/raw/refs/heads/main/MalwTool.ps1) -replace '^\uFEFF', '')"
+powershell -command "irm https://github.com/ImMALWARE/MalwTool/raw/refs/heads/main/MalwTool.ps1 | iex"
 ```
 Второй, сокращенный вариант команды (просто редирект на тот же GitHub с моего сайта)
 ```pwsh
-powershell -command "iex ((irm https://malw.link/dl/malwtool) -replace '^\uFEFF', '')"
+powershell -command "irm https://malw.link/dl/malwtool | iex"
 ```
 
 # Возможности
@@ -59,7 +59,7 @@ powershell -command "iex ((irm https://malw.link/dl/malwtool) -replace '^\uFEFF'
 ## Запуск
 Для запуска необходимо выполнить команду. Проще всего открыть поиск Windows и выполнить её там. Но ещё можно выполнить в Win + R, в cmd, в PowerShell, в мастере создания ярлыка
 ```pwsh
-powershell -command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; iex ((irm https://raw.githubusercontent.com/ImMALWARE/MalwTool/main/MalwToolLegacy.ps1) -replace '^\uFEFF', '')"
+powershell -command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; irm https://raw.githubusercontent.com/ImMALWARE/MalwTool/main/MalwToolLegacy.ps1 | iex"
 ```
 
 ## Возможности по активации:
