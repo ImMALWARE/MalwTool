@@ -91,7 +91,6 @@ if ($PSUICulture -eq "ru-RU") {
             sfc = "Проверить системные файлы на целостность"
             sfc_shutdown_desc = "Через 60 секунд будет перезагрузка для проверки системного диска!"
             sfc_title = "Проверка системы"
-            sfc_note = "⚠!!! Сейчас нажмите Y и Enter для проверки диска!!!"
             other = "У меня другая проблема!"
             other_desc = "Даже если проблема не связана с $app, всё равно напишите"
             ouninstall_nogethelp = "Вы должны установить приложение Техническая поддержка для этой функции. Установите и запустите функцию заново."
@@ -204,7 +203,6 @@ if ($PSUICulture -eq "ru-RU") {
             sfc = "Check system files for integrity"
             sfc_shutdown_desc = "In 60 seconds there will be a reboot to check the system disk!"
             sfc_title = "Checking system"
-            sfc_note = "⚠!!! Now press Y and Enter for checking disk!!!"
             other = "I have another problem!"
             other_desc = "Contact me, even if the problem is unrelated to $app"
             ouninstall_nogethelp = "You must install Get Help app for this function! Install and and run again."
@@ -1134,7 +1132,15 @@ $clear_winkms.Add_Click({
 })
 
 $sfc_scannow.Add_Click({
-    Start-Process powershell -ArgumentList "`$host.UI.RawUI.WindowTitle = '$app — $($strings.problems.sfc_title)'; Set-Location $env:SystemRoot\System32; .\sfc /scannow; .\Dism /Online /Cleanup-Image /RestoreHealth; Write-Host '$($strings.problems.sfc_note)' .\chkdsk ${(Get-WmiObject Win32_OperatingSystem).SystemDrive} /b /x; .\shutdown /r /t 60 /c '$($strings.problems.sfc_shutdown_desc)'; pause" -Verb RunAs
+    Start-Process powershell -ArgumentList @"
+`$host.UI.RawUI.WindowTitle = '$app — $($strings.problems.sfc_title)'
+Set-Location '$env:SystemRoot\System32'
+.\Dism /Online /Cleanup-Image /RestoreHealth
+.\sfc /scannow
+echo Y | .\chkdsk $env:SystemDrive /b
+.\shutdown /r /t 60 /c '$($strings.problems.sfc_shutdown_desc)'
+pause
+"@ -Verb RunAs
 })
 
 $otherproblem.Add_Click({
