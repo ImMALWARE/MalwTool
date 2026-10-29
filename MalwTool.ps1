@@ -36,6 +36,7 @@ if ($PSUICulture -eq "ru-RU") {
             tl = "Премиум-аккаунт в TL, вы сможете отключить добавление рекламных серверов в его настройках"
             act = "Активировать!"
             notfound = "%p% не найден!"
+            hwid_enterprise = "Активация через HWID не работает на корпоративной (Enterprise) версии Windows! Используйте активацию через KMS."
         }
         mc = @{
             prismok = "Автономный аккаунт в Prism Launcher разблокирован!"
@@ -148,6 +149,7 @@ if ($PSUICulture -eq "ru-RU") {
             tl = "Premium account in TL, you will be able to disable adding advertised servers in its settings"
             act = "Activate!"
             notfound = "%p% not found!"
+            hwid_enterprise = "HWID activation does not work on Windows Enterprise edition! Please use KMS activation."
         }
         mc = @{
             prismok = "Offline account in Prism Launcher unlocked!"
@@ -473,6 +475,14 @@ $Act.Add_Click({
             else {
                 $mb.Invoke($strings.mc.tlnoacc, $app, "OK", "Warning")
             }
+        }
+        "Win10" {
+            $edition = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -ErrorAction SilentlyContinue).EditionID
+            if ($edition -in @("Enterprise", "EnterpriseN")) {
+                $mb.Invoke($strings.act.hwid_enterprise, $app, "OK", "Warning")
+                break
+            }
+            Start-Process powershell -ArgumentList ("`$Product = '$prod'; " + $gstrings[0] + "/" + $activators[$prod] + $gstrings[1]) -Verb RunAs
         }
         default {
             if ($paths[$prod] -ne $null -and -not (check_path $paths[$prod] $prod)) {break}

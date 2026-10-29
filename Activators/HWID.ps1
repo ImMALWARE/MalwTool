@@ -1,11 +1,18 @@
 if ($PSUICulture -eq "ru-RU") {$host.ui.RawUI.WindowTitle = 'MalwTool — Активация Windows 10/11 через HWID'}
 else {$host.ui.RawUI.WindowTitle = 'MalwTool — Activating Windows 10/11 via HWID'}
 
+$edition = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -ErrorAction SilentlyContinue).EditionID
+if ($edition -in @("Enterprise", "EnterpriseN")) {
+    if ($PSUICulture -eq "ru-RU") {Write-Host "`nАктивация через HWID не работает на корпоративной (Enterprise) версии Windows! Используйте активацию через KMS.`n"}
+    else {Write-Host "`nHWID activation does not work on Windows Enterprise edition! Please use KMS activation.`n"}
+    pause
+    exit
+}
+
 Set-Location $env:SystemRoot\System32
 ./cscript.exe //nologo slmgr.vbs /ckms > $null
 ./cscript.exe //nologo slmgr.vbs /upk > $null
 ./cscript.exe //nologo slmgr.vbs /cpky > $null
-./cscript.exe //nologo slmgr.vbs /ipk XGVPP-NMH47-7TTHJ-W3FW7-8HV2C > $null # Enterprise
 ./cscript.exe //nologo slmgr.vbs /ipk YNMGQ-8RYV3-4PGQ3-C8XTP-7CFBY > $null # Education
 ./cscript.exe //nologo slmgr.vbs /ipk 8PTT6-RNW4C-6V7J2-C2D3X-MHBPB > $null # Pro Education
 ./cscript.exe //nologo slmgr.vbs /ipk DXG7C-N36C4-C4HTG-X4T3X-2YV77 > $null # Pro for Workstations
